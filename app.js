@@ -31,9 +31,10 @@ const quiz = [
         correct: 'セシル'
     }
 ];
+//グローバル変数
 const quizLength = quiz.length
 let quizIndex = 0;
-
+let score = 0;
 
 
 
@@ -58,6 +59,7 @@ setupQuiz();
 const clickHandler = (e) => {
     if(quiz[quizIndex].correct === e.target.textContent){
         window.alert('正解！');
+        score++;
     } else {
         window.alert('不正解！');
     }
@@ -68,7 +70,7 @@ const clickHandler = (e) => {
         setupQuiz();
     } else {
         //問題数がなければこちらを実行
-        window.alert('終了！');
+        window.alert('終了！あなたの正解数は、' + score + '問/' + quizLength + '問中' + 'です！');
     }
 };
 
