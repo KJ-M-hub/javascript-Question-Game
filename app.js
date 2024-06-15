@@ -1,32 +1,41 @@
+//問題文
 const question = 'ゲーム市場、最も売れたゲーム機は次の内どれ？'
+//選択肢
 const answers = [
     'スーパーファミコン',
     'プレイステーション２',
     'ニンテンドースイッチ',
     'ニンテンドーDS'
 ];
+//正解
 const correct = 'ニンテンドーDS';
-
-console.log();
-document.getElementById('js-question').textContent = question
-
-const $button = document.getElementsByTagName('button')
-// $button[0].textContent = answers[0];
-// $button[1].textContent = answers[1];
-// $button[2].textContent = answers[2];
-// $button[3].textContent = answers[3];
-
-let buttonIndex = 0;
-let buttonLength = $button.length;
-while(buttonIndex < buttonLength){
-    $button[buttonIndex].textContent = answers[buttonIndex];
-    buttonIndex++;
+//buttonの定義
+const $button = document.getElementsByTagName('button');
+const buttonLength = $button.length;
+//クイズの問題文、選択肢を定義
+const setupQuiz = () => {
+    document.getElementById('js-question').textContent = question
+    let buttonIndex = 0;
+    while(buttonIndex < buttonLength){
+        $button[buttonIndex].textContent = answers[buttonIndex];
+        buttonIndex++;
+    }
 }
+setupQuiz();
 
-document.getElementsByTagName('button')[0].addEventListener('click', () => {
-    if(correct === $button){
+//関数clickHandlerで、「マウスで選んだ箇所のテキストがcorrectと同じなら正解、違うなら不正解をalertする」を定義する。
+const clickHandler = (e) => {
+    if(correct === e.target.textContent){
         window.alert('正解！');
     } else {
         window.alert('不正解！');
     }
-});
+};
+
+let handlerIndex = 0;
+while(handlerIndex < buttonLength){
+    $button[handlerIndex].addEventListener('click', (e) => {
+        clickHandler(e);
+    });
+    handlerIndex++;
+}
